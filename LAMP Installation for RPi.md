@@ -36,19 +36,19 @@ foo@bar:~$ passwd root
 Add a user:
 
 ```sh
-foo@bar:~$ adduser <newuser>
+foo@bar:~$ adduser <your_username>
 ```
 
 Grant sudo privileges to your new user:
 
 ```sh
-foo@bar:~$ usermod -aG sudo <newuser>
+foo@bar:~$ usermod -aG sudo <your_username>
 ```
 
 Switch to the new user:
 
 ```sh
-foo@bar:~$ su <newuser>
+foo@bar:~$ su <your_username>
 ```
 
 ### Setup git:
@@ -159,11 +159,11 @@ After=syslog.target network.target
 
 [Service]
 Type=forking
-User=ernie
+User=<your_username>
 Group=sudo
-WorkingDirectory=/home/ernie
+WorkingDirectory=/home/<your_username>
 
-PIDFile=/home/ernie/.vnc/%H:%i.pid
+PIDFile=/home/<your_username>/.vnc/%H:%i.pid
 ExecStartPre=-/usr/bin/vncserver -kill :%i > /dev/null 2>&1
 ExecStart=/usr/bin/vncserver -depth 24 -geometry 1366x1024 :%i
 ExecStop=/usr/bin/vncserver -kill :%i
@@ -244,7 +244,7 @@ foo@bar:~$ sudo systemctl enable apache2
 Modify /etc/apache2/apache.conf and add the following:
 
 ```sh
-<Directory /home/<user>/websites>
+<Directory /home/<your_username>/websites>
 	Options Indexes FollowSymLinks
 	AllowOverride None
 	Require all granted
@@ -274,7 +274,7 @@ foo@bar:~$ cp 000-default.conf <eg. localhost.conf or any other name of your vir
 Modify /etc/apache2/sites-available/000-default.conf to include the new root path:
 
 ```sh
-foo@bar:~$ DocumentRoot /home/<user>/websites 
+foo@bar:~$ DocumentRoot /home/<your_username>/websites 
 ```
 
 Enable each virtual site created:
@@ -286,7 +286,7 @@ foo@bar:~$ sudo a2ensite <virtualhost.conf>
 Chmod command to set permissions:
 
 ```sh
-foo@bar:~$ chmod -R 755 /home/<user>/websites
+foo@bar:~$ chmod -R 755 /home/<your_username>/websites
 ```
 
 You should also set permissions (???I think this sets permissions for virtual host sites???):
@@ -326,10 +326,10 @@ THEN SET A NEW ROOT PASSWORD.  ALL OTHER OPTIONS CAN BE DEFAULT.
 
 ```sh
 foo@bar:~$ sudo mariadb
-MariaDB [(none)]> GRANT ALL ON *.* TO '<user>'@'localhost' IDENTIFIED BY '<password>' WITH GRANT OPTION;
+MariaDB [(none)]> GRANT ALL ON *.* TO '<your_username>'@'localhost' IDENTIFIED BY '<password>' WITH GRANT OPTION;
 ```
 
-### I set <user> above as my user in kali with the associated password
+### I set <your_username> above as my user in kali with the associated password
 
 ```sh
 MariaDB [(none)]> FLUSH PRIVILEGES;
@@ -360,7 +360,7 @@ foo@bar:~$ sudo apt install php7.3-zip   #verify your current php version to ins
 ### Create a info.php file with vim:
 
 ```sh
-foo@bar:~$ vim /home/<user>/<websites>/info.php
+foo@bar:~$ vim /home/<your_username>/<websites>/info.php
 ```
 
 enter the following...
@@ -440,15 +440,15 @@ foo@bar:~$ sudo apt install unzip  #came installed with KaliPi
 Download the latest zip file from Concrete5 site and unzip it into the websites directory:
 
 ```sh
-foo@bar:~$ unzip <concrete5version.zip> -d /home/<user>/websites
+foo@bar:~$ unzip <concrete5version.zip> -d /home/<your_username>/websites
 ```
 
 Create a new database in mysql:
 
 ```sh
-foo@bar:~$ mysql -u <user> -p
+foo@bar:~$ mysql -u <your_username> -p
 MariaDB [(none)]> CREATE DATABASE IF NOT EXISTS <new database>;
-MariaDB [(none)]> GRANT ALL ON *.* TO '<user>'@'localhost' IDENTIFIED BY '<password>' WITH GRANT OPTION;
+MariaDB [(none)]> GRANT ALL ON *.* TO '<your_username>'@'localhost' IDENTIFIED BY '<password>' WITH GRANT OPTION;
 MariaDB [(none)]> FLUSH PRIVILEGES;
 MariaDB [(none)]> exit
 ```
@@ -456,8 +456,8 @@ MariaDB [(none)]> exit
 Set proper permissions:
 
 ```sh
-foo@bar:~$ sudo chown -R www-data:www-data /home/<user>/websites/<sandbox or whatever directory you unzipped concrete5 to>
-foo@bar:~$ sudo chmod -R 775 /home/<user>/websites/<sandbox or whatever directory as above>
+foo@bar:~$ sudo chown -R www-data:www-data /home/<your_username>/websites/<sandbox or whatever directory you unzipped concrete5 to>
+foo@bar:~$ sudo chmod -R 775 /home/<your_username>/websites/<sandbox or whatever directory as above>
 ```
 
 Restart apache2:
