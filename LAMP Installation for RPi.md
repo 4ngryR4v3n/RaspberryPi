@@ -68,7 +68,7 @@ foo@bar:~$ git config --list
 
 **You can optionally install the kalipi-config from RPi-Tweaks but you must do as root, not sudo**
 
-[https://github.com/Re4son/RPi-Tweaks/blob/master/kalipi-config/README.md]
+https://github.com/Re4son/RPi-Tweaks/blob/master/kalipi-config/README.md
 
 Go through the setup and change localization, wifi, etc.  **do not change the NETWORK OPTIONS - HOSTNAME** it interferes with things later, OR you can add the following into /etc/hosts to match your /etc/hostname file
 
